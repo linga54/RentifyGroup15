@@ -25,11 +25,17 @@ public class adminWelcome extends AppCompatActivity {
 
     }
 
-    public void OnSetContinueButton(View view) {
-        //View buttonContinueWelcome = findViewById(R.id.buttonContinueWelcome);
+    public void OnSetUserButton(View view) {
+        View button6 = findViewById(R.id.button6);
 //Application Context and Activity
-        Intent intent = new Intent(getApplicationContext(), Add.class);
+        Intent intent = new Intent(getApplicationContext(), Categories.class);
         startActivity (intent);}
 
+
+    public void OnSetCategoriesButton(View view) {
+        View button8 = findViewById(R.id.button8);
+//Application Context and Activity
+        Intent intent = new Intent(getApplicationContext(), Categories.class);
+        startActivity (intent);}
 
 }

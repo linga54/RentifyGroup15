@@ -8,6 +8,7 @@ public class CategoryEx {
 
     public CategoryEx() {
     }
+
     public CategoryEx(String id, String categoryname, String description) {
         _id = id;
         _categoryname = categoryname;
@@ -24,14 +25,14 @@ public class CategoryEx {
     public String getId() {
         return _id;
     }
-    public void setProductName(String _categoryname) {
-        _categoryname = _categoryname;
+    public void setCategoryName(String _categoryname) {
+        this._categoryname = _categoryname;
     }
-    public String getProductName() {
+    public String getCategoryName() {
         return _categoryname;
     }
-    public void setDescription(String description) {
-        _description = _description;
+    public void setDescription(String _description) {
+        this._description = _description;
     }
     public String getDescription() {
         return _description;

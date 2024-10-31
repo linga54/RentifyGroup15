@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_below="@id/editTextName"
-        android:hint="Enter price" />
+        android:hint="Enter description" />
 
     <Button
         android:id="@+id/addButton"
@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/addButton"
-        android:text="Products"
+        android:text="Categories"
         android:textAlignment="center" />
 
     <ListView

@@ -12,12 +12,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
@@ -67,7 +63,7 @@ public class Categories extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 CategoryEx categoryEx = categories.get(i);
-                showUpdateDeleteDialog(categoryEx.getId(), categoryEx.getProductName());
+                showUpdateDeleteDialog(categoryEx.getId(), categoryEx.getCategoryName());
                 return true;
             }
         });
@@ -96,6 +92,8 @@ protected void onStart() {
 
         public void onCancelled(DatabaseError databaseError) {
 
+            Toast.makeText(Categories.this, "Error: " + databaseError.getMessage(), Toast.LENGTH_LONG).show();
+
         }
     });
 
@@ -103,11 +101,11 @@ protected void onStart() {
 }
 
 
-private void showUpdateDeleteDialog(final String productId, String productName) {
+private void showUpdateDeleteDialog(final String categoryId, String name) {
 
     AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
     LayoutInflater inflater = getLayoutInflater();
-    final View dialogView = inflater.inflate(R.layout.update_category, null);
+    final View dialogView = inflater.inflate(R.layout.layout_update_category, null);
     dialogBuilder.setView(dialogView);
 
     final EditText editTextName = (EditText) dialogView.findViewById(R.id.editTextName2);
@@ -115,7 +113,7 @@ private void showUpdateDeleteDialog(final String productId, String productName) 
     final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdateCategory);
     final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteCategory);
 
-    dialogBuilder.setTitle(productName);
+    dialogBuilder.setTitle(name);
     final AlertDialog b = dialogBuilder.create();
     b.show();
 
@@ -123,9 +121,9 @@ private void showUpdateDeleteDialog(final String productId, String productName) 
         @Override
         public void onClick(View view) {
             String name = editTextName.getText().toString().trim();
-            String description = editTextName.getText().toString().trim();
+            String description = editTextDescription.getText().toString().trim();
             if (!TextUtils.isEmpty(name)) {
-                updateCategory(productId, name, description);
+                updateCategory(categoryId, name, description);
                 b.dismiss();
             }
         }
@@ -134,7 +132,7 @@ private void showUpdateDeleteDialog(final String productId, String productName) 
     buttonDelete.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            deleteCategory(productId);
+            deleteCategory(categoryId);
             b.dismiss();
         }
     });
@@ -159,23 +157,24 @@ private void deleteCategory(String id) {
 
 private void addCategory() {
 
+
     String name = editTextName.getText().toString().trim();
 
-    String description = editTextName.getText().toString().trim();
+    String description = editTextDescription.getText().toString().trim();
 
     if (!TextUtils.isEmpty(name)) {
 
         String id = databaseCategories.push().getKey();
 
-        CategoryEx categoryEx = new CategoryEx(id, name, description);
+        CategoryEx category = new CategoryEx(id, name, description);
 
-        databaseCategories.child(id).setValue(categoryEx);
+        databaseCategories.child(id).setValue(category);
 
         editTextName.setText("");
 
         editTextDescription.setText("");
 
-        Toast.makeText(this, "Product added", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Category added", Toast.LENGTH_LONG).show();
 
     } else {
 

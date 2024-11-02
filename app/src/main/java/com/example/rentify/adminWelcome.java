@@ -28,7 +28,7 @@ public class adminWelcome extends AppCompatActivity {
     public void OnSetUserButton(View view) {
         View button6 = findViewById(R.id.button6);
 //Application Context and Activity
-        Intent intent = new Intent(getApplicationContext(), Categories.class);
+        Intent intent = new Intent(getApplicationContext(), ManageUsers.class);
         startActivity (intent);}
 
 
@@ -39,3 +39,4 @@ public class adminWelcome extends AppCompatActivity {
         startActivity (intent);}
 
 }
+

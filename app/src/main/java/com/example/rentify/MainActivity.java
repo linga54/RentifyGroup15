@@ -18,8 +18,8 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     private EditText usernameInput;
     private EditText passwordInput;
-    private static HashMap<String, String> rentorDatabase = new HashMap<>();
-    private static HashMap<String, String> lessorDatabase = new HashMap<>();
+    public static HashMap<String, String> rentorDatabase = new HashMap<>();
+    public static HashMap<String, String> lessorDatabase = new HashMap<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

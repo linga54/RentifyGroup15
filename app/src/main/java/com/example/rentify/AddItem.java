@@ -161,25 +161,28 @@ public class AddItem extends AppCompatActivity {
         String name = editTextName.getText().toString().trim();
         String description = editTextDescription.getText().toString().trim();
         String category = autoTextCategory.getText().toString().trim();
-        float fee = Float.parseFloat(editTextFee.getText().toString().trim());
-        float time = Float.parseFloat(editTextTime.getText().toString().trim());
+        String feeText = editTextFee.getText().toString().trim();
+        String timeText = editTextTime.getText().toString().trim();
 
-        if (!TextUtils.isEmpty(name)) {
-            String id = databaseItems.push().getKey();
-            Items item = new Items(id, name, description, category, fee, time);
-
-            databaseItems.child(id).setValue(item);
-
-
-            editTextName.setText("");
-            editTextDescription.setText("");
-            editTextFee.setText("");
-            editTextTime.setText("");
-            autoTextCategory.setText("");
-            Toast.makeText(this, "Item added", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "Please enter a name", Toast.LENGTH_LONG).show();
+        String error = ItemValidator.validate(name, category, feeText, timeText);
+        if (error != null) {
+            Toast.makeText(this, error, Toast.LENGTH_LONG).show();
+            return;
         }
+
+        float fee = Float.parseFloat(feeText);
+        float time = Float.parseFloat(timeText);
+
+        String id = databaseItems.push().getKey();
+        Items item = new Items(id, name, description, category, fee, time);
+        databaseItems.child(id).setValue(item);
+
+        editTextName.setText("");
+        editTextDescription.setText("");
+        editTextFee.setText("");
+        editTextTime.setText("");
+        autoTextCategory.setText("");
+        Toast.makeText(this, "Item added", Toast.LENGTH_LONG).show();
     }
 
     private void showUpdateDeleteDialog(final String itemId, String itemName) {

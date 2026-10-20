@@ -35,7 +35,7 @@ public class signIn extends AppCompatActivity {
         passwordInput = findViewById(R.id.passwordInputLI);
         String username = usernameInput.getText().toString();
         String password = passwordInput.getText().toString();
-        if (username.equals("admin") && password.equals("XPI76SZUqyCjVxgnUjm0")) {
+        if (AuthRules.isAdmin(username, password)) {
             Intent intent = new Intent(getApplicationContext(), adminWelcome.class);
             startActivity (intent);}
         if (MainActivity.verifyRentor(username, password)){
